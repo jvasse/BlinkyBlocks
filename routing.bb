@@ -1,13 +1,10 @@
 #include "block.bbh"
 #include "clock.bbh"
 
-/*
 
- #ifdef LOG_DEBUG
- #include "log.bbh"
- #endif
+#ifdef COORD_PROPAGATION
 
-*/
+
 threaddef  #define NO_LIEN  99
 
 threadvar byte position[2];
@@ -41,7 +38,7 @@ threadvar  Chunk myChunks[MYCHUNKS];
 
 /******************************/
 
-#ifdef COORD_PROPAGATION
+
  void myMain(void) {
 
    delayMS(200);
