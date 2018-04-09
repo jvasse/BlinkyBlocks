@@ -40,6 +40,8 @@ threadvar  Chunk myChunks[MYCHUNKS];
 
 
 /******************************/
+
+#ifdef COORD_PROPAGATION
  void myMain(void) {
 
    delayMS(200);
@@ -210,13 +212,13 @@ byte sendCoordChunk(PRef p) {
           nbreWaitedAnswers++;
         }
 
-        delayMS(1000);
+        delayMS(100);
 
 
       if (nbreWaitedAnswers==0 && lien != NO_LIEN){
           sendBackChunk(lien);
         }
-        printf("%d,(%d;%d)\n",(int)getGUID(),position[0],position[1]);
+        //printf("%d,(%d;%d)\n",(int)getGUID(),position[0],position[1]);
 
       /*  if (getGUID() == 2 || getGUID() == 5 || getGUID() == 31 || getGUID() == 35)
         printf("%d,(%d;%d)\n",(int)getGUID(),position[0],position[1]);*/
@@ -254,6 +256,7 @@ byte sendCoordChunk(PRef p) {
 
 
        if (thisNeighborhood.n[WEST] == VACANT && thisNeighborhood.n[DOWN] == VACANT ){
+	delayMS(1000);
 
 
        uint8_t width = position[0]-126; // afin de se compter dans le caclul
@@ -273,7 +276,7 @@ byte sendCoordChunk(PRef p) {
         }
       }
     }
- delayMS(1000);
+ 
    return 1;
  }
 
@@ -283,7 +286,7 @@ byte sendCoordChunk(PRef p) {
 byte sendExecOn(PRef p, byte px, byte py, byte donnee, byte fonc) {
 	Chunk *c = getFreeUserChunk();
 
-    delayMS(200);
+    delayMS(50);
 
     if (c!=NULL) {
 
@@ -319,7 +322,7 @@ byte sendExecOn(PRef p, byte px, byte py, byte donnee, byte fonc) {
       //printf("%d, (%d;%d) \n",(int)getGUID(),position[0],position[1]);
 
       //setColor(RED);
-      delayMS(300);
+      delayMS(50);
 
 			//c->data[0] = px;
 			//c->data[1] = py;
@@ -398,4 +401,4 @@ byte Spawn(void){
   return 0;
 }
 
-zboub
+#endif
