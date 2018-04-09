@@ -39,18 +39,7 @@ threadvar  Chunk myChunks[MYCHUNKS];
 /******************************/
 
 
- void myMain(void) {
-
-   delayMS(200);
-   lien=NO_LIEN;
-   nbreWaitedAnswers=0;
-   position[0] = 0;
-   position[1] = 0;
-   xplusBorder = WEST;
-   yplusBorder = UP;
-   tab[0]= 0;
-   tab[1]= 0;
-   countspawn=0;
+ void Core(void) {
 
    if (thisNeighborhood.n[DOWN] == VACANT && thisNeighborhood.n[EAST] == VACANT) {
 
@@ -67,7 +56,7 @@ threadvar  Chunk myChunks[MYCHUNKS];
      }
 
 
-
+/*
  while(1) {
          delayMS(100);
          //if (position[0] == 127 && position[1] == 127 && nbreWaitedAnswers == 0)
@@ -75,6 +64,7 @@ threadvar  Chunk myChunks[MYCHUNKS];
 
 
    }
+   */
 }
 
 
@@ -82,8 +72,18 @@ threadvar  Chunk myChunks[MYCHUNKS];
 /**** systeme ****/
 /******************/
 
-void userRegistration(void) {
-    registerHandler(SYSTEM_MAIN, (GenericHandler)&myMain);
+void initCoord(void) {
+  delayMS(50);
+  lien=NO_LIEN;
+  nbreWaitedAnswers=0;
+  position[0] = 0;
+  position[1] = 0;
+  xplusBorder = WEST;
+  yplusBorder = UP;
+  tab[0]= 0;
+  tab[1]= 0;
+  countspawn=0;
+    Core();
 }
 
 void freeMyChunk(void) {
@@ -273,7 +273,7 @@ byte sendCoordChunk(PRef p) {
         }
       }
     }
- 
+
    return 1;
  }
 
@@ -388,6 +388,10 @@ byte getSpawn(uint8_t donnee, uint8_t t){
 byte Spawn(void){
 //while (1) {
     setColor(WHITE);
+
+    spawn = 1;
+    triggerHandler(COORDINATE_COMPUTED);
+
 ////    setColor(PURPLE);
 //    delayMS(150);
 
