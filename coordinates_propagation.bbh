@@ -1,0 +1,35 @@
+#ifndef __COORDINATES_PROPAGATION_H__
+#define __COORDINATES_PROPAGATION_H__
+
+
+#include "block.bbh"
+#include "clock.bbh"
+
+
+
+#define MYCHUNKS 12
+#define NO_LIEN  99
+
+byte goMessageHandler(void);
+
+byte sendBackChunk(PRef p);
+
+byte backMessageHandler(void);
+
+byte sendCoordChunk(PRef p);
+
+byte coordMessageHandler(void);
+
+byte sendExecOn(PRef p, byte px, byte py, byte donnee, byte fonc);
+
+byte execOn(void);
+
+byte Itwork(void);
+
+byte Spawn(void);
+
+byte getSpawn(uint8_t donnee,uint8_t t);
+
+
+#endif
+
